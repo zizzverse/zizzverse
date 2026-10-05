@@ -26,58 +26,99 @@ font:inherit
 }
 
 
-/* ===== ZIZZVERSE INTRO ===== */
+/* ===== ZIZZVERSE ANIMATED INTRO ===== */
 
 #intro-screen{
-position:fixed;
-inset:0;
-z-index:9999;
-display:flex;
-align-items:center;
-justify-content:center;
-background:#07070b;
-animation:introSlide .8s ease-in-out 1.2s forwards;
+    position:fixed;
+    inset:0;
+    z-index:9999;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    background:#07070b;
+
+    animation:introSlide .9s cubic-bezier(.77,0,.18,1) 2.2s forwards;
 }
 
 .intro-logo{
-font-size:clamp(42px,10vw,80px);
-font-weight:900;
-letter-spacing:3px;
-color:#a66cff;
-text-shadow:
-0 0 15px rgba(166,108,255,.5),
-0 0 35px rgba(166,108,255,.25);
-animation:logoShow 1s ease-out forwards;
+    position:relative;
+
+    font-size:clamp(42px,10vw,80px);
+    font-weight:900;
+    letter-spacing:4px;
+
+    color:#a66cff;
+
+    text-shadow:
+        0 0 10px rgba(166,108,255,.8),
+        0 0 25px rgba(166,108,255,.6),
+        0 0 50px rgba(166,108,255,.35);
+
+    animation:
+        logoReveal 1.2s cubic-bezier(.2,.8,.2,1) forwards,
+        logoPulse 1s ease-in-out 1.2s infinite;
 }
 
-@keyframes logoShow{
 
-0%{
-opacity:0;
-transform:scale(.7);
+/* Logo appears */
+
+@keyframes logoReveal{
+
+    0%{
+        opacity:0;
+        transform:scale(.4);
+        filter:blur(15px);
+    }
+
+    60%{
+        opacity:1;
+        transform:scale(1.12);
+        filter:blur(0);
+    }
+
+    100%{
+        opacity:1;
+        transform:scale(1);
+        filter:blur(0);
+    }
+
 }
 
-60%{
-opacity:1;
-transform:scale(1.08);
+
+/* Small glowing pulse */
+
+@keyframes logoPulse{
+
+    0%,100%{
+        text-shadow:
+            0 0 10px rgba(166,108,255,.8),
+            0 0 25px rgba(166,108,255,.6),
+            0 0 50px rgba(166,108,255,.35);
+    }
+
+    50%{
+        text-shadow:
+            0 0 15px rgba(166,108,255,1),
+            0 0 35px rgba(166,108,255,.8),
+            0 0 70px rgba(166,108,255,.5);
+    }
+
 }
 
-100%{
-opacity:1;
-transform:scale(1);
-}
 
-}
+/* Intro slides away */
 
 @keyframes introSlide{
 
-0%{
-transform:translateX(0);
-}
+    0%{
+        transform:translateX(0);
+    }
 
-100%{
-transform:translateX(-100%);
-}
+    100%{
+        transform:translateX(-100%);
+    }
 
 }
 
