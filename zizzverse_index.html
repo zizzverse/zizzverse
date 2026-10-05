@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="ZIZZVERSE — Anime Universe">
+<title>ZIZZVERSE — Anime Universe</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
+body{font-family:Arial,Helvetica,sans-serif;background:#07070b;color:#fff;line-height:1.5}
+a{text-decoration:none;color:inherit}button,input{font:inherit}
+.nav{position:sticky;top:0;z-index:100;height:68px;display:flex;align-items:center;justify-content:space-between;padding:0 5%;background:rgba(7,7,11,.92);backdrop-filter:blur(12px);border-bottom:1px solid #222230}
+.logo{font-size:25px;font-weight:900;letter-spacing:1px;color:#a66cff}.nav-links{display:flex;gap:25px;color:#c9c9d3;font-size:14px}.nav-links a:hover{color:#b477ff}
+.search{display:flex;align-items:center;gap:8px;background:#14141d;border:1px solid #292938;border-radius:10px;padding:8px 12px}.search input{width:130px;background:none;border:0;outline:0;color:#fff}
+.hero{min-height:520px;display:flex;align-items:center;padding:80px 7%;position:relative;overflow:hidden;background:radial-gradient(circle at 75% 35%,rgba(140,70,255,.28),transparent 35%),linear-gradient(110deg,#07070b 20%,#11101c 65%,#171024)}
+.hero:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#07070b 0%,transparent 65%);pointer-events:none}
+.hero-content{position:relative;z-index:2;max-width:650px}.badge{display:inline-block;padding:7px 12px;border:1px solid #51357a;border-radius:999px;color:#c69aff;background:#1b1129;font-size:12px;margin-bottom:18px}
+.hero h1{font-size:clamp(42px,7vw,76px);line-height:1.05;margin-bottom:18px}.hero h1 span{color:#a66cff}.hero p{color:#b8b8c5;max-width:560px;margin-bottom:28px;font-size:16px}
+.btn{display:inline-block;padding:13px 20px;border-radius:9px;background:#9b5cff;font-weight:800;box-shadow:0 10px 30px rgba(155,92,255,.2)}.btn:hover{background:#ae78ff}
+.section{padding:42px 5%}.section-head{display:flex;align-items:end;justify-content:space-between;margin-bottom:20px;gap:15px}.section h2{font-size:25px}.view{color:#a66cff;font-size:14px}
+.chips{display:flex;gap:10px;overflow:auto;padding-bottom:8px;margin-bottom:28px}.chip{flex:0 0 auto;padding:9px 14px;border-radius:999px;background:#12121a;border:1px solid #292938;color:#c9c9d3}.chip:hover{border-color:#9b5cff;color:#fff}
+.grid{display:grid;grid-template-columns:repeat(5,1fr);gap:16px}.card{background:#111119;border:1px solid #242432;border-radius:12px;overflow:hidden;transition:.25s}.card:hover{transform:translateY(-6px);border-color:#8e5bdb}
+.poster{width:100%;aspect-ratio:2/3;object-fit:cover;display:block;background:#1a1a25}.info{padding:12px}.info h3{font-size:15px;margin-bottom:5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.info p{font-size:12px;color:#8e8e9d}.rating{color:#ffc857;font-size:12px;margin-top:6px}
+.feature{display:grid;grid-template-columns:1.2fr 1fr;gap:25px;padding:24px;background:#101019;border:1px solid #282838;border-radius:16px}.feature-art{min-height:260px;border-radius:12px;background:linear-gradient(135deg,rgba(155,92,255,.45),rgba(20,20,30,.1)),url("https://placehold.co/1000x600/15151f/ffffff?text=ZIZZVERSE+FEATURED") center/cover}.feature-copy{display:flex;flex-direction:column;justify-content:center}.feature-copy h2{font-size:32px;margin:8px 0}.feature-copy p{color:#aaaab8;margin-bottom:20px}
+footer{margin-top:30px;padding:35px 5%;text-align:center;background:#0d0d14;border-top:1px solid #222230;color:#777}footer strong{color:#a66cff}
+@media(max-width:1000px){.grid{grid-template-columns:repeat(4,1fr)}}@media(max-width:750px){.nav-links{display:none}.search input{width:90px}.hero{min-height:460px;padding:65px 6%}.grid{grid-template-columns:repeat(2,1fr);gap:12px}.feature{grid-template-columns:1fr}.feature-art{min-height:190px}.section{padding:34px 5%}}
+</style>
+</head>
+<body>
+<header class="nav">
+<a class="logo" href="#">ZIZZVERSE</a>
+<nav class="nav-links"><a href="#home">Home</a><a href="#trending">Trending</a><a href="#popular">Popular</a><a href="#genres">Genres</a></nav>
+<div class="search">🔎<input id="searchInput" type="search" placeholder="Search anime..."></div>
+</header>
+<main id="home">
+<section class="hero"><div class="hero-content"><span class="badge">🔥 YOUR ANIME UNIVERSE</span><h1>Welcome to <span>ZIZZVERSE</span></h1><p>Discover trending anime, legendary characters and the latest series — all in one place.</p><a class="btn" href="#trending">Explore Anime →</a></div></section>
+<section class="section" id="genres"><div class="section-head"><h2>Browse Genres</h2></div><div class="chips"><a class="chip" href="#">Action</a><a class="chip" href="#">Adventure</a><a class="chip" href="#">Fantasy</a><a class="chip" href="#">Romance</a><a class="chip" href="#">Comedy</a><a class="chip" href="#">Horror</a><a class="chip" href="#">Sci-Fi</a></div></section>
+<section class="section" id="trending"><div class="section-head"><h2>🔥 Trending Anime</h2><a class="view" href="#">View All</a></div><div class="grid" id="animeGrid">
+<article class="card" data-title="Demon Slayer"><img class="poster" src="https://placehold.co/600x900/17121f/ffffff?text=DEMON+SLAYER" alt="Demon Slayer"><div class="info"><h3>Demon Slayer</h3><p>Kimetsu no Yaiba</p><div class="rating">★ 9.0</div></div></article>
+<article class="card" data-title="Naruto"><img class="poster" src="https://placehold.co/600x900/17121f/ffffff?text=NARUTO" alt="Naruto"><div class="info"><h3>Naruto</h3><p>Shinobi Universe</p><div class="rating">★ 8.7</div></div></article>
+<article class="card" data-title="One Piece"><img class="poster" src="https://placehold.co/600x900/17121f/ffffff?text=ONE+PIECE" alt="One Piece"><div class="info"><h3>One Piece</h3><p>Grand Line Adventure</p><div class="rating">★ 9.2</div></div></article>
+<article class="card" data-title="Jujutsu Kaisen"><img class="poster" src="https://placehold.co/600x900/17121f/ffffff?text=JUJUTSU+KAISEN" alt="Jujutsu Kaisen"><div class="info"><h3>Jujutsu Kaisen</h3><p>Cursed Energy</p><div class="rating">★ 8.8</div></div></article>
+<article class="card" data-title="Chainsaw Man"><img class="poster" src="https://placehold.co/600x900/17121f/ffffff?text=CHAINSAW+MAN" alt="Chainsaw Man"><div class="info"><h3>Chainsaw Man</h3><p>Devil Hunters</p><div class="rating">★ 8.6</div></div></article>
+</div></section>
+<section class="section" id="popular"><div class="section-head"><h2>⭐ Featured</h2></div><div class="feature"><div class="feature-art"></div><div class="feature-copy"><span class="badge">ZIZZVERSE FEATURE</span><h2>Anime. Characters. Stories.</h2><p>Build ZIZZVERSE into your own anime community with news, character profiles, rankings and more.</p><a class="btn" href="#trending">Start Exploring</a></div></div></section>
+</main>
+<footer>© 2026 <strong>ZIZZVERSE</strong> — Anime Universe</footer>
+<script>
+const search=document.getElementById("searchInput"),cards=document.querySelectorAll(".card");
+search.addEventListener("input",()=>{const q=search.value.toLowerCase().trim();cards.forEach(c=>c.style.display=c.dataset.title.toLowerCase().includes(q)?"":"none")});
+</script>
+</body>
+</html>
