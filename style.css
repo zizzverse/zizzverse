@@ -25,6 +25,65 @@ input{
 font:inherit
 }
 
+
+/* ===== ZIZZVERSE INTRO ===== */
+
+#intro-screen{
+position:fixed;
+inset:0;
+z-index:9999;
+display:flex;
+align-items:center;
+justify-content:center;
+background:#07070b;
+animation:introSlide .8s ease-in-out 1.2s forwards;
+}
+
+.intro-logo{
+font-size:clamp(42px,10vw,80px);
+font-weight:900;
+letter-spacing:3px;
+color:#a66cff;
+text-shadow:
+0 0 15px rgba(166,108,255,.5),
+0 0 35px rgba(166,108,255,.25);
+animation:logoShow 1s ease-out forwards;
+}
+
+@keyframes logoShow{
+
+0%{
+opacity:0;
+transform:scale(.7);
+}
+
+60%{
+opacity:1;
+transform:scale(1.08);
+}
+
+100%{
+opacity:1;
+transform:scale(1);
+}
+
+}
+
+@keyframes introSlide{
+
+0%{
+transform:translateX(0);
+}
+
+100%{
+transform:translateX(-100%);
+}
+
+}
+
+
+/* ===== NAVIGATION ===== */
+
 .nav{
 position:sticky;
 top:0;
@@ -57,6 +116,9 @@ font-size:14px
 color:#b477ff
 }
 
+
+/* ===== SEARCH ===== */
+
 .search{
 display:flex;
 align-items:center;
@@ -75,6 +137,9 @@ outline:0;
 color:#fff
 }
 
+
+/* ===== HERO ===== */
+
 .hero{
 min-height:520px;
 display:flex;
@@ -83,15 +148,29 @@ padding:80px 7%;
 position:relative;
 overflow:hidden;
 background:
-radial-gradient(circle at 75% 35%,rgba(140,70,255,.28),transparent 35%),
-linear-gradient(110deg,#07070b 20%,#11101c 65%,#171024)
+radial-gradient(
+circle at 75% 35%,
+rgba(140,70,255,.28),
+transparent 35%
+),
+linear-gradient(
+110deg,
+#07070b 20%,
+#11101c 65%,
+#171024
+)
 }
 
 .hero:after{
 content:"";
 position:absolute;
 inset:0;
-background:linear-gradient(90deg,#07070b 0%,transparent 65%);
+background:
+linear-gradient(
+90deg,
+#07070b 0%,
+transparent 65%
+);
 pointer-events:none
 }
 
@@ -135,12 +214,16 @@ padding:13px 20px;
 border-radius:9px;
 background:#9b5cff;
 font-weight:800;
-box-shadow:0 10px 30px rgba(155,92,255,.2)
+box-shadow:
+0 10px 30px rgba(155,92,255,.2)
 }
 
 .btn:hover{
 background:#ae78ff
 }
+
+
+/* ===== SECTIONS ===== */
 
 .section{
 padding:42px 5%
@@ -163,6 +246,9 @@ color:#a66cff;
 font-size:14px
 }
 
+
+/* ===== GENRES ===== */
+
 .chips{
 display:flex;
 gap:10px;
@@ -184,6 +270,9 @@ color:#c9c9d3
 border-color:#9b5cff;
 color:#fff
 }
+
+
+/* ===== ANIME GRID ===== */
 
 .grid{
 display:grid;
@@ -235,6 +324,9 @@ font-size:12px;
 margin-top:6px
 }
 
+
+/* ===== FEATURED ===== */
+
 .feature{
 display:grid;
 grid-template-columns:1.2fr 1fr;
@@ -249,8 +341,14 @@ border-radius:16px
 min-height:260px;
 border-radius:12px;
 background:
-linear-gradient(135deg,rgba(155,92,255,.45),rgba(20,20,30,.1)),
-url("https://placehold.co/1000x600/15151f/ffffff?text=ZIZZVERSE+FEATURED")
+linear-gradient(
+135deg,
+rgba(155,92,255,.45),
+rgba(20,20,30,.1)
+),
+url(
+"https://placehold.co/1000x600/15151f/ffffff?text=ZIZZVERSE+FEATURED"
+)
 center/cover
 }
 
@@ -270,7 +368,8 @@ color:#aaaab8;
 margin-bottom:20px
 }
 
-/* ===== OWNER & SOCIAL SECTION ===== */
+
+/* ===== OWNER & SOCIAL ===== */
 
 .owner-section{
 margin:10px 5% 24px;
@@ -329,6 +428,7 @@ transform:translateY(-2px);
 border-color:#9b5cff
 }
 
+
 /* ===== FOOTER ===== */
 
 footer{
@@ -344,6 +444,9 @@ footer strong{
 color:#a66cff
 }
 
+
+/* ===== RESPONSIVE ===== */
+
 @media(max-width:1000px){
 
 .grid{
@@ -351,6 +454,7 @@ grid-template-columns:repeat(4,1fr)
 }
 
 }
+
 
 @media(max-width:750px){
 
