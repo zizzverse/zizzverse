@@ -499,13 +499,58 @@ grid-template-columns:repeat(4,1fr)
 
 @media(max-width:750px){
 
-.nav-links{
-    display:flex;
-    gap:16px;
-    overflow-x:auto;
-    white-space:nowrap;
-    flex:1;
-    scrollbar-width:none;
+    .nav{
+        height:70px;
+        padding:0 18px;
+        display:flex;
+        align-items:center;
+        gap:12px;
+    }
+
+    .logo{
+        font-size:23px;
+        flex:1;
+    }
+
+    .nav-links{
+        display:none;
+        position:absolute;
+        top:70px;
+        left:0;
+        width:100%;
+        padding:15px 20px;
+
+        background:#0d0d14;
+        border-bottom:1px solid #252532;
+
+        flex-direction:column;
+        gap:0;
+    }
+
+    .nav-links.active{
+        display:flex;
+    }
+
+    .nav-links a{
+        padding:14px 5px;
+        font-size:16px;
+        border-bottom:1px solid #20202a;
+    }
+
+    .search{
+        width:42px;
+        flex-shrink:0;
+    }
+
+    .search input{
+        display:none;
+    }
+
+    .menu-btn{
+        display:block;
+        width:42px;
+        height:42px;
+    }
 }
 
 .nav-links::-webkit-scrollbar{
