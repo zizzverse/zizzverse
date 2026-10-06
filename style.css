@@ -500,7 +500,20 @@ grid-template-columns:repeat(4,1fr)
 @media(max-width:750px){
 
 .nav-links{
-display:none
+    display:flex;
+    gap:16px;
+    overflow-x:auto;
+    white-space:nowrap;
+    flex:1;
+    scrollbar-width:none;
+}
+
+.nav-links::-webkit-scrollbar{
+    display:none;
+}
+
+.nav-links a{
+    flex:0 0 auto;
 }
 
 .search input{
