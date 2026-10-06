@@ -10,6 +10,18 @@
         content="width=device-width, initial-scale=1.0"
     >
 
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
     <meta
         name="description"
         content="ZIZZVERSE — Anime Short Videos"
@@ -17,12 +29,144 @@
 
     <title>ZIZZVERSE — Shorts</title>
 
+
     <!-- ===== SHORTS CSS ===== -->
 
     <link
         rel="stylesheet"
         href="shorts.css"
     >
+
+
+    <!-- =================================================
+         CUSTOM VIDEO CONTROLS CSS
+    ================================================= -->
+
+    <style>
+
+        /* ===== VIDEO BOX ===== */
+
+        .video-box {
+            position: relative;
+            overflow: hidden;
+        }
+
+
+        /* ===== CUSTOM CONTROLS ===== */
+
+        .custom-controls {
+            position: absolute;
+            left: 10px;
+            right: 10px;
+            bottom: 10px;
+
+            z-index: 20;
+
+            display: flex;
+            align-items: center;
+
+            gap: 5px;
+
+            padding: 7px 8px;
+
+            background: rgba(0, 0, 0, 0.65);
+
+            backdrop-filter: blur(8px);
+
+            border-radius: 12px;
+
+            opacity: 0;
+
+            transform: translateY(10px);
+
+            transition:
+                opacity 0.25s ease,
+                transform 0.25s ease;
+        }
+
+
+        /* Show controls */
+
+        .video-box:hover .custom-controls,
+        .video-box.controls-visible .custom-controls {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+
+        /* ===== CONTROL BUTTON ===== */
+
+        .custom-btn {
+            border: none;
+
+            background: transparent;
+
+            color: white;
+
+            width: 38px;
+            height: 38px;
+
+            border-radius: 8px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 16px;
+
+            cursor: pointer;
+
+            flex-shrink: 0;
+        }
+
+
+        .custom-btn:hover {
+            background: rgba(255,255,255,0.15);
+        }
+
+
+        .custom-btn:active {
+            transform: scale(0.92);
+        }
+
+
+        /* ===== PROGRESS BAR ===== */
+
+        .custom-progress {
+            flex: 1;
+
+            min-width: 40px;
+
+            height: 4px;
+
+            cursor: pointer;
+
+            accent-color: #8b5cf6;
+        }
+
+
+        /* ===== MOBILE ===== */
+
+        @media (max-width: 600px) {
+
+            .custom-controls {
+                left: 7px;
+                right: 7px;
+                bottom: 7px;
+
+                padding: 5px;
+            }
+
+            .custom-btn {
+                width: 34px;
+                height: 34px;
+
+                font-size: 14px;
+            }
+
+        }
+
+    </style>
 
 </head>
 
@@ -39,7 +183,10 @@
 
         <!-- ===== ZIZZVERSE LOGO ===== -->
 
-        <a href="../" class="logo">
+        <a
+            href="../"
+            class="logo"
+        >
 
             ZIZZ<span>VERSE</span>
 
@@ -195,7 +342,7 @@
             <div class="video-box">
 
                 <video
-                    src="Videos/short2.mp4"                                        
+                    src="Videos/short2.mp4"
                     preload="metadata"
                     playsinline
                 ></video>
@@ -229,7 +376,7 @@
             <div class="video-box">
 
                 <video
-                    src="Videos/short3.mp4"                                                          preload="metadata"
+                    src="Videos/short3.mp4"
                     preload="metadata"
                     playsinline
                 ></video>
@@ -444,7 +591,7 @@
 
 
         /* ===============================================
-           VIDEO AUTO PLAY / PAUSE
+           ALL VIDEOS
         =============================================== */
 
         const videos =
@@ -452,6 +599,11 @@
                 ".short-card video"
             );
 
+
+
+        /* ===============================================
+           VIDEO AUTO PLAY / PAUSE
+        =============================================== */
 
         const videoObserver =
             new IntersectionObserver(
@@ -468,7 +620,8 @@
                             entry.intersectionRatio >= 0.7
                         ) {
 
-                            // Pause all other videos
+
+                            /* Pause all other videos */
 
                             videos.forEach(
                                 otherVideo => {
@@ -485,7 +638,7 @@
                             );
 
 
-                            // Play current video
+                            /* Play current video */
 
                             video.play().catch(
                                 () => {}
@@ -494,7 +647,7 @@
 
                         } else {
 
-                            // Pause video when it leaves the screen
+                            /* Pause when leaving screen */
 
                             video.pause();
 
@@ -526,10 +679,12 @@
                 "shortSearch"
             );
 
+
         const shortCards =
             document.querySelectorAll(
                 ".short-card"
             );
+
 
         const noResults =
             document.getElementById(
@@ -552,17 +707,20 @@
 
                 shortCards.forEach(card => {
 
+
                     const title =
                         card
                             .querySelector("h3")
                             .textContent
                             .toLowerCase();
 
+
                     const description =
                         card
                             .querySelector("p")
                             .textContent
                             .toLowerCase();
+
 
                     const dataTitle =
                         card
@@ -608,9 +766,534 @@
         );
 
 
+
+        /* ===============================================
+           AUTOMATIC CUSTOM VIDEO CONTROLS
+           
+           IMPORTANT:
+           No controls need to be added inside
+           every video-box.
+           
+           JavaScript creates them automatically
+           for ALL videos.
+        =============================================== */
+
+        document
+            .querySelectorAll(".video-box")
+            .forEach(box => {
+
+
+                const video =
+                    box.querySelector("video");
+
+
+                /* Create controls */
+
+                const controls =
+                    document.createElement("div");
+
+
+                controls.className =
+                    "custom-controls";
+
+
+                /* Play button */
+
+                const playBtn =
+                    document.createElement("button");
+
+
+                playBtn.className =
+                    "custom-btn";
+
+
+                playBtn.type =
+                    "button";
+
+
+                playBtn.textContent =
+                    "▶";
+
+
+                playBtn.setAttribute(
+                    "aria-label",
+                    "Play or pause"
+                );
+
+
+                /* Back 10 */
+
+                const backBtn =
+                    document.createElement("button");
+
+
+                backBtn.className =
+                    "custom-btn";
+
+
+                backBtn.type =
+                    "button";
+
+
+                backBtn.textContent =
+                    "↶10";
+
+
+                backBtn.setAttribute(
+                    "aria-label",
+                    "Back 10 seconds"
+                );
+
+
+                /* Forward 10 */
+
+                const forwardBtn =
+                    document.createElement("button");
+
+
+                forwardBtn.className =
+                    "custom-btn";
+
+
+                forwardBtn.type =
+                    "button";
+
+
+                forwardBtn.textContent =
+                    "10↷";
+
+
+                forwardBtn.setAttribute(
+                    "aria-label",
+                    "Forward 10 seconds"
+                );
+
+
+                /* Mute */
+
+                const muteBtn =
+                    document.createElement("button");
+
+
+                muteBtn.className =
+                    "custom-btn";
+
+
+                muteBtn.type =
+                    "button";
+
+
+                muteBtn.textContent =
+                    "🔊";
+
+
+                muteBtn.setAttribute(
+                    "aria-label",
+                    "Mute or unmute"
+                );
+
+
+                /* Progress */
+
+                const progress =
+                    document.createElement("input");
+
+
+                progress.className =
+                    "custom-progress";
+
+
+                progress.type =
+                    "range";
+
+
+                progress.min =
+                    "0";
+
+
+                progress.max =
+                    "100";
+
+
+                progress.value =
+                    "0";
+
+
+                progress.step =
+                    "0.1";
+
+
+                progress.setAttribute(
+                    "aria-label",
+                    "Video progress"
+                );
+
+
+                /* Fullscreen */
+
+                const fullscreenBtn =
+                    document.createElement("button");
+
+
+                fullscreenBtn.className =
+                    "custom-btn";
+
+
+                fullscreenBtn.type =
+                    "button";
+
+
+                fullscreenBtn.textContent =
+                    "⛶";
+
+
+                fullscreenBtn.setAttribute(
+                    "aria-label",
+                    "Fullscreen"
+                );
+
+
+
+                /* Add everything */
+
+                controls.appendChild(
+                    playBtn
+                );
+
+                controls.appendChild(
+                    backBtn
+                );
+
+                controls.appendChild(
+                    forwardBtn
+                );
+
+                controls.appendChild(
+                    muteBtn
+                );
+
+                controls.appendChild(
+                    progress
+                );
+
+                controls.appendChild(
+                    fullscreenBtn
+                );
+
+
+                box.appendChild(
+                    controls
+                );
+
+
+
+                /* =======================================
+                   PLAY / PAUSE
+                ======================================= */
+
+                playBtn.addEventListener(
+                    "click",
+                    event => {
+
+                        event.stopPropagation();
+
+
+                        if (video.paused) {
+
+                            /* Pause every other video */
+
+                            videos.forEach(
+                                otherVideo => {
+
+                                    if (
+                                        otherVideo !== video
+                                    ) {
+
+                                        otherVideo.pause();
+
+                                    }
+
+                                }
+                            );
+
+
+                            video.play().catch(
+                                () => {}
+                            );
+
+                        } else {
+
+                            video.pause();
+
+                        }
+
+                    }
+                );
+
+
+
+                /* =======================================
+                   PLAY ICON
+                ======================================= */
+
+                video.addEventListener(
+                    "play",
+                    () => {
+
+                        playBtn.textContent =
+                            "⏸";
+
+                    }
+                );
+
+
+                video.addEventListener(
+                    "pause",
+                    () => {
+
+                        playBtn.textContent =
+                            "▶";
+
+                    }
+                );
+
+
+
+                /* =======================================
+                   BACK 10 SECONDS
+                ======================================= */
+
+                backBtn.addEventListener(
+                    "click",
+                    event => {
+
+                        event.stopPropagation();
+
+                        video.currentTime =
+                            Math.max(
+                                0,
+                                video.currentTime - 10
+                            );
+
+                    }
+                );
+
+
+
+                /* =======================================
+                   FORWARD 10 SECONDS
+                ======================================= */
+
+                forwardBtn.addEventListener(
+                    "click",
+                    event => {
+
+                        event.stopPropagation();
+
+
+                        if (video.duration) {
+
+                            video.currentTime =
+                                Math.min(
+                                    video.duration,
+                                    video.currentTime + 10
+                                );
+
+                        }
+
+                    }
+                );
+
+
+
+                /* =======================================
+                   SOUND ON / OFF
+                ======================================= */
+
+                muteBtn.addEventListener(
+                    "click",
+                    event => {
+
+                        event.stopPropagation();
+
+
+                        video.muted =
+                            !video.muted;
+
+
+                        if (video.muted) {
+
+                            muteBtn.textContent =
+                                "🔇";
+
+                        } else {
+
+                            muteBtn.textContent =
+                                "🔊";
+
+                        }
+
+                    }
+                );
+
+
+
+                /* =======================================
+                   UPDATE PROGRESS
+                ======================================= */
+
+                video.addEventListener(
+                    "timeupdate",
+                    () => {
+
+                        if (video.duration) {
+
+                            progress.value =
+                                (
+                                    video.currentTime /
+                                    video.duration
+                                ) * 100;
+
+                        }
+
+                    }
+                );
+
+
+
+                /* =======================================
+                   SEEK VIDEO
+                ======================================= */
+
+                progress.addEventListener(
+                    "input",
+                    event => {
+
+                        event.stopPropagation();
+
+
+                        if (video.duration) {
+
+                            video.currentTime =
+                                (
+                                    progress.value /
+                                    100
+                                ) * video.duration;
+
+                        }
+
+                    }
+                );
+
+
+
+                /* =======================================
+                   FULLSCREEN
+                ======================================= */
+
+                fullscreenBtn.addEventListener(
+                    "click",
+                    event => {
+
+                        event.stopPropagation();
+
+
+                        if (
+                            document.fullscreenElement
+                        ) {
+
+                            document.exitFullscreen();
+
+                        } else {
+
+                            if (
+                                box.requestFullscreen
+                            ) {
+
+                                box.requestFullscreen();
+
+                            }
+
+                        }
+
+                    }
+                );
+
+
+
+                /* =======================================
+                   SHOW CONTROLS
+                ======================================= */
+
+                let hideTimer;
+
+
+                function showControls() {
+
+                    box.classList.add(
+                        "controls-visible"
+                    );
+
+
+                    clearTimeout(
+                        hideTimer
+                    );
+
+
+                    hideTimer =
+                        setTimeout(
+                            () => {
+
+                                if (
+                                    !video.paused
+                                ) {
+
+                                    box.classList.remove(
+                                        "controls-visible"
+                                    );
+
+                                }
+
+                            },
+                            2500
+                        );
+
+                }
+
+
+                box.addEventListener(
+                    "click",
+                    showControls
+                );
+
+
+                box.addEventListener(
+                    "touchstart",
+                    showControls,
+                    {
+                        passive: true
+                    }
+                );
+
+
+                video.addEventListener(
+                    "pause",
+                    () => {
+
+                        box.classList.add(
+                            "controls-visible"
+                        );
+
+                    }
+                );
+
+
+            });
+
+
     </script>
 
 
 </body>
 
-</html>
+    </html>
