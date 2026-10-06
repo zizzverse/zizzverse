@@ -170,6 +170,15 @@ border-radius:10px;
 padding:8px 12px
 }
 
+.menu-btn{
+    display:none;
+    background:none;
+    border:0;
+    color:#fff;
+    font-size:28px;
+    cursor:pointer;
+}
+
 .search input{
 width:130px;
 background:none;
