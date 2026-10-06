@@ -341,7 +341,58 @@
                 );
 
             });
+<script>
 
+    // ===== VIDEO AUTO PLAY / PAUSE =====
+
+    const videos = document.querySelectorAll(".short-card video");
+
+    const videoObserver = new IntersectionObserver(
+        (entries) => {
+
+            entries.forEach(entry => {
+
+                const video = entry.target;
+
+                if (entry.isIntersecting && entry.intersectionRatio >= 0.7) {
+
+                    // Pause all other videos
+                    videos.forEach(otherVideo => {
+
+                        if (otherVideo !== video) {
+                            otherVideo.pause();
+                        }
+
+                    });
+
+                    // Play the current video
+                    video.play().catch(() => {});
+
+                } else {
+
+                    // Pause the video when it leaves the screen
+                    video.pause();
+
+                }
+
+            });
+
+        },
+        {
+            threshold: [0.7]
+        }
+    );
+
+
+    // Observe all videos
+    videos.forEach(video => {
+
+        videoObserver.observe(video);
+
+    });
+
+  
+    
     </script>
 
 
