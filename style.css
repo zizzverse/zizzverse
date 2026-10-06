@@ -62,8 +62,6 @@ font:inherit
 }
 
 
-/* Logo appears */
-
 @keyframes logoReveal{
 
     0%{
@@ -87,8 +85,6 @@ font:inherit
 }
 
 
-/* Small glowing pulse */
-
 @keyframes logoPulse{
 
     0%,100%{
@@ -107,8 +103,6 @@ font:inherit
 
 }
 
-
-/* Intro slides away */
 
 @keyframes introSlide{
 
@@ -170,21 +164,43 @@ border-radius:10px;
 padding:8px 12px
 }
 
-.menu-btn{
-    display:none;
-    background:none;
-    border:0;
-    color:#fff;
-    font-size:28px;
-    cursor:pointer;
-}
-
 .search input{
 width:130px;
 background:none;
 border:0;
 outline:0;
 color:#fff
+}
+
+
+/* ===== MOBILE MENU BUTTON ===== */
+
+.menu-btn{
+display:none;
+
+width:42px;
+height:42px;
+
+padding:0;
+margin:0;
+
+align-items:center;
+justify-content:center;
+
+background:#14141d;
+
+border:1px solid #292938;
+border-radius:12px;
+
+color:#fff;
+
+font-size:25px;
+line-height:1;
+
+cursor:pointer;
+
+appearance:none;
+-webkit-appearance:none;
 }
 
 
@@ -197,6 +213,7 @@ align-items:center;
 padding:80px 7%;
 position:relative;
 overflow:hidden;
+
 background:
 radial-gradient(
 circle at 75% 35%,
@@ -215,12 +232,14 @@ linear-gradient(
 content:"";
 position:absolute;
 inset:0;
+
 background:
 linear-gradient(
 90deg,
 #07070b 0%,
 transparent 65%
 );
+
 pointer-events:none
 }
 
@@ -264,6 +283,7 @@ padding:13px 20px;
 border-radius:9px;
 background:#9b5cff;
 font-weight:800;
+
 box-shadow:
 0 10px 30px rgba(155,92,255,.2)
 }
@@ -390,6 +410,7 @@ border-radius:16px
 .feature-art{
 min-height:260px;
 border-radius:12px;
+
 background:
 linear-gradient(
 135deg,
@@ -523,7 +544,8 @@ color:#a66cff
         flex:1;
     }
 
-    /* Mobile Navigation Menu */
+
+    /* ===== MOBILE NAVIGATION ===== */
 
     .nav-links{
         display:none;
@@ -543,11 +565,11 @@ color:#a66cff
         gap:0;
     }
 
-    /* Menu Open */
 
     .nav-links.active{
         display:flex;
     }
+
 
     .nav-links a{
         padding:15px 5px;
@@ -592,10 +614,12 @@ color:#a66cff
         justify-content:center;
 
         background:#14141d;
+
         border:1px solid #292938;
         border-radius:12px;
 
         color:#fff;
+
         font-size:25px;
         line-height:1;
 
