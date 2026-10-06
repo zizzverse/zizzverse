@@ -362,5 +362,21 @@ card.dataset.title.toLowerCase().includes(q)
 
 </script>
 
+    <!-- ===== MOBILE MENU BUTTON ===== -->
+     <script>
+const menuBtn = document.getElementById("menuBtn");
+const navLinks = document.getElementById("navLinks");
+
+menuBtn.addEventListener("click", () => {
+    navLinks.classList.toggle("active");
+
+    if(navLinks.classList.contains("active")){
+        menuBtn.textContent = "✕";
+    }else{
+        menuBtn.textContent = "☰";
+    }
+});
+    </script>
+    
 </body>
 </html>
