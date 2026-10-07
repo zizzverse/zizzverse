@@ -575,3 +575,57 @@ input {
     }
 
 }
+
+
+/* =================================================
+   MOBILE MENU
+================================================= */
+
+.mobile-menu {
+    position: fixed;
+
+    top: 58px;
+    right: 12px;
+
+    width: 190px;
+
+    z-index: 2000;
+
+    display: none;
+
+    flex-direction: column;
+
+    padding: 8px;
+
+    background: rgba(15, 15, 20, 0.97);
+
+    border: 1px solid #292938;
+
+    border-radius: 14px;
+
+    box-shadow: 0 10px 35px rgba(0,0,0,.5);
+
+    backdrop-filter: blur(12px);
+}
+
+.mobile-menu.active {
+    display: flex;
+}
+
+.mobile-menu a {
+    padding: 13px 14px;
+
+    color: #fff;
+
+    text-decoration: none;
+
+    border-radius: 9px;
+
+    font-size: 14px;
+}
+
+.mobile-menu a:hover {
+    background: rgba(139, 92, 246, .15);
+
+    color: #a66cff;
+}
