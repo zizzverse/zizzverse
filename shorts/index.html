@@ -7,17 +7,16 @@
 
     <meta
         name="viewport"
-        content="width=device-width, initial-scale=1.0"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
     >
 
     <meta
         name="description"
-        content="ZIZZVERSE — Anime Short Videos"
+        content="ZIZZVERSE — Anime Shorts"
     >
 
     <title>ZIZZVERSE — Shorts</title>
 
-    <!-- SHORTS CSS -->
     <link
         rel="stylesheet"
         href="shorts.css"
@@ -30,85 +29,38 @@
 
 
     <!-- =================================================
-         NAVIGATION
+         TOP NAVIGATION
     ================================================= -->
 
-    <header class="nav">
+    <header class="top-nav">
 
-        <!-- ZIZZVERSE LOGO -->
-
-        <a
-            href="../"
-            class="logo"
-        >
+        <a href="../" class="logo">
             ZIZZ<span>VERSE</span>
         </a>
 
+        <div class="nav-actions">
 
-        <!-- NAVIGATION MENU -->
-
-        <nav
-            class="nav-links"
-            id="navLinks"
-        >
-
-            <a href="../">
-                Home
-            </a>
-
-            <a href="../#trending">
-                Trending
-            </a>
-
-            <a href="../#popular">
-                Popular
-            </a>
-
-            <a href="../#genres">
-                Genres
-            </a>
-
-            <a
-                href="index.html"
-                class="active"
+            <button
+                class="nav-btn"
+                id="searchBtn"
+                type="button"
+                aria-label="Search"
             >
-                Shorts
-            </a>
+                🔍
+            </button>
 
-        </nav>
+            <button
+                class="nav-btn"
+                id="menuBtn"
+                type="button"
+                aria-label="Menu"
+            >
+                ☰
+            </button>
 
-
-        <!-- MOBILE MENU BUTTON -->
-
-        <button
-            class="menu-btn"
-            id="menuBtn"
-            aria-label="Open menu"
-            type="button"
-        >
-            ☰
-        </button>
+        </div>
 
     </header>
-
-
-
-    <!-- =================================================
-         SHORTS HERO
-    ================================================= -->
-
-    <section class="shorts-hero">
-
-        <h1>
-            Anime <span>Shorts</span>
-        </h1>
-
-        <p>
-            Watch the latest anime short videos
-            from ZIZZVERSE.
-        </p>
-
-    </section>
 
 
 
@@ -116,7 +68,10 @@
          SEARCH
     ================================================= -->
 
-    <div class="shorts-search">
+    <div
+        class="search-panel"
+        id="searchPanel"
+    >
 
         <input
             type="search"
@@ -125,227 +80,500 @@
             autocomplete="off"
         >
 
-        <span class="search-icon">
-            🔍
-        </span>
+        <button
+            id="closeSearch"
+            type="button"
+        >
+            ✕
+        </button>
 
     </div>
 
 
 
     <!-- =================================================
-         SHORT VIDEOS
+         REELS FEED
     ================================================= -->
 
-    <main class="shorts-container">
+    <main
+        class="reels-feed"
+        id="reelsFeed"
+    >
 
 
-        <!-- ===== SHORT 1 ===== -->
+        <!-- =================================================
+             REEL 1
+        ================================================= -->
 
-        <div
-            class="short-card"
+        <article
+            class="reel"
             data-title="video 1 hot video"
         >
 
-            <div class="video-box">
+            <video
+                class="reel-video"
+                src="Videos/short1.mp4"
+                playsinline
+                preload="metadata"
+            ></video>
 
-                <video
-                    src="Videos/short1.mp4"
-                    preload="metadata"
-                    playsinline
-                    muted
-                ></video>
+
+            <!-- VIDEO GRADIENT -->
+
+            <div class="video-gradient"></div>
+
+
+            <!-- CENTER PLAY -->
+
+            <button
+                class="center-play"
+                type="button"
+                aria-label="Play"
+            >
+                ▶
+            </button>
+
+
+            <!-- RIGHT ACTIONS -->
+
+            <div class="reel-actions">
+
+                <button
+                    class="action-btn like-btn"
+                    type="button"
+                    aria-label="Like"
+                >
+                    ♡
+                    <span>Like</span>
+                </button>
+
+                <button
+                    class="action-btn comment-btn"
+                    type="button"
+                    aria-label="Comment"
+                >
+                    💬
+                    <span>Comment</span>
+                </button>
+
+                <button
+                    class="action-btn share-btn"
+                    type="button"
+                    aria-label="Share"
+                >
+                    ↗
+                    <span>Share</span>
+                </button>
 
             </div>
 
 
-            <div class="video-info">
+            <!-- VIDEO INFORMATION -->
 
-                <h3>
-                    HOT VIDEO💥
-                </h3>
+            <div class="reel-info">
+
+                <h2>
+                    🔥 HOT VIDEO
+                </h2>
 
                 <p>
-                    Video 1
+                    Video 1 • ZIZZVERSE
                 </p>
 
             </div>
 
-        </div>
+
+            <!-- BOTTOM CONTROLS -->
+
+            <div class="reel-controls">
+
+                <button
+                    class="control-btn play-control"
+                    type="button"
+                >
+                    ▶
+                </button>
+
+                <button
+                    class="control-btn mute-control"
+                    type="button"
+                >
+                    🔊
+                </button>
+
+                <input
+                    class="reel-progress"
+                    type="range"
+                    min="0"
+                    max="100"
+                    value="0"
+                    step="0.1"
+                >
+
+                <button
+                    class="control-btn fullscreen-control"
+                    type="button"
+                >
+                    ⛶
+                </button>
+
+            </div>
+
+        </article>
 
 
 
-        <!-- ===== SHORT 2 ===== -->
+        <!-- =================================================
+             REEL 2
+        ================================================= -->
 
-        <div
-            class="short-card"
+        <article
+            class="reel"
             data-title="video 2 hot video"
         >
 
-            <div class="video-box">
+            <video
+                class="reel-video"
+                src="Videos/short2.mp4"
+                playsinline
+                preload="metadata"
+            ></video>
 
-                <video
-                    src="Videos/short2.mp4"
-                    preload="metadata"
-                    playsinline
-                    muted
-                ></video>
+            <div class="video-gradient"></div>
+
+            <button
+                class="center-play"
+                type="button"
+                aria-label="Play"
+            >
+                ▶
+            </button>
+
+            <div class="reel-actions">
+
+                <button class="action-btn like-btn" type="button">
+                    ♡
+                    <span>Like</span>
+                </button>
+
+                <button class="action-btn comment-btn" type="button">
+                    💬
+                    <span>Comment</span>
+                </button>
+
+                <button class="action-btn share-btn" type="button">
+                    ↗
+                    <span>Share</span>
+                </button>
 
             </div>
 
+            <div class="reel-info">
 
-            <div class="video-info">
-
-                <h3>
-                    HOT VIDEO💥
-                </h3>
+                <h2>
+                    🔥 HOT VIDEO
+                </h2>
 
                 <p>
-                    Video 2
+                    Video 2 • ZIZZVERSE
                 </p>
 
             </div>
 
-        </div>
+            <div class="reel-controls">
+
+                <button class="control-btn play-control" type="button">
+                    ▶
+                </button>
+
+                <button class="control-btn mute-control" type="button">
+                    🔊
+                </button>
+
+                <input
+                    class="reel-progress"
+                    type="range"
+                    min="0"
+                    max="100"
+                    value="0"
+                    step="0.1"
+                >
+
+                <button class="control-btn fullscreen-control" type="button">
+                    ⛶
+                </button>
+
+            </div>
+
+        </article>
 
 
 
-        <!-- ===== SHORT 3 ===== -->
+        <!-- =================================================
+             REEL 3
+        ================================================= -->
 
-        <div
-            class="short-card"
+        <article
+            class="reel"
             data-title="video 3 hot video"
         >
 
-            <div class="video-box">
+            <video
+                class="reel-video"
+                src="Videos/short3.mp4"
+                playsinline
+                preload="metadata"
+            ></video>
 
-                <video
-                    src="Videos/short3.mp4"
-                    preload="metadata"
-                    playsinline
-                    muted
-                ></video>
+            <div class="video-gradient"></div>
+
+            <button
+                class="center-play"
+                type="button"
+                aria-label="Play"
+            >
+                ▶
+            </button>
+
+            <div class="reel-actions">
+
+                <button class="action-btn like-btn" type="button">
+                    ♡
+                    <span>Like</span>
+                </button>
+
+                <button class="action-btn comment-btn" type="button">
+                    💬
+                    <span>Comment</span>
+                </button>
+
+                <button class="action-btn share-btn" type="button">
+                    ↗
+                    <span>Share</span>
+                </button>
 
             </div>
 
+            <div class="reel-info">
 
-            <div class="video-info">
-
-                <h3>
-                    HOT VIDEO💥
-                </h3>
+                <h2>
+                    🔥 HOT VIDEO
+                </h2>
 
                 <p>
-                    Video 3
+                    Video 3 • ZIZZVERSE
                 </p>
 
             </div>
 
-        </div>
+            <div class="reel-controls">
+
+                <button class="control-btn play-control" type="button">
+                    ▶
+                </button>
+
+                <button class="control-btn mute-control" type="button">
+                    🔊
+                </button>
+
+                <input
+                    class="reel-progress"
+                    type="range"
+                    min="0"
+                    max="100"
+                    value="0"
+                    step="0.1"
+                >
+
+                <button class="control-btn fullscreen-control" type="button">
+                    ⛶
+                </button>
+
+            </div>
+
+        </article>
 
 
 
-        <!-- ===== SHORT 4 ===== -->
+        <!-- =================================================
+             REEL 4
+        ================================================= -->
 
-        <div
-            class="short-card"
+        <article
+            class="reel"
             data-title="video 4 hot video"
         >
 
-            <div class="video-box">
+            <video
+                class="reel-video"
+                src="Videos/short4.mp4"
+                playsinline
+                preload="metadata"
+            ></video>
 
-                <video
-                    src="Videos/short4.mp4"
-                    preload="metadata"
-                    playsinline
-                    muted
-                ></video>
+            <div class="video-gradient"></div>
+
+            <button
+                class="center-play"
+                type="button"
+                aria-label="Play"
+            >
+                ▶
+            </button>
+
+            <div class="reel-actions">
+
+                <button class="action-btn like-btn" type="button">
+                    ♡
+                    <span>Like</span>
+                </button>
+
+                <button class="action-btn comment-btn" type="button">
+                    💬
+                    <span>Comment</span>
+                </button>
+
+                <button class="action-btn share-btn" type="button">
+                    ↗
+                    <span>Share</span>
+                </button>
 
             </div>
 
+            <div class="reel-info">
 
-            <div class="video-info">
-
-                <h3>
-                    HOT VIDEO💥
-                </h3>
+                <h2>
+                    🔥 HOT VIDEO
+                </h2>
 
                 <p>
-                    Video 4
+                    Video 4 • ZIZZVERSE
                 </p>
 
             </div>
 
-        </div>
+            <div class="reel-controls">
+
+                <button class="control-btn play-control" type="button">
+                    ▶
+                </button>
+
+                <button class="control-btn mute-control" type="button">
+                    🔊
+                </button>
+
+                <input
+                    class="reel-progress"
+                    type="range"
+                    min="0"
+                    max="100"
+                    value="0"
+                    step="0.1"
+                >
+
+                <button class="control-btn fullscreen-control" type="button">
+                    ⛶
+                </button>
+
+            </div>
+
+        </article>
 
 
 
-        <!-- ===== SHORT 5 ===== -->
+        <!-- =================================================
+             REEL 5
+        ================================================= -->
 
-        <div
-            class="short-card"
+        <article
+            class="reel"
             data-title="video 5 hot video"
         >
 
-            <div class="video-box">
+            <video
+                class="reel-video"
+                src="Videos/short5.mp4"
+                playsinline
+                preload="metadata"
+            ></video>
 
-                <video
-                    src="Videos/short5.mp4"
-                    preload="metadata"
-                    playsinline
-                    muted
-                ></video>
+            <div class="video-gradient"></div>
+
+            <button
+                class="center-play"
+                type="button"
+                aria-label="Play"
+            >
+                ▶
+            </button>
+
+            <div class="reel-actions">
+
+                <button class="action-btn like-btn" type="button">
+                    ♡
+                    <span>Like</span>
+                </button>
+
+                <button class="action-btn comment-btn" type="button">
+                    💬
+                    <span>Comment</span>
+                </button>
+
+                <button class="action-btn share-btn" type="button">
+                    ↗
+                    <span>Share</span>
+                </button>
 
             </div>
 
+            <div class="reel-info">
 
-            <div class="video-info">
-
-                <h3>
-                    HOT VIDEO💥
-                </h3>
+                <h2>
+                    🔥 HOT VIDEO
+                </h2>
 
                 <p>
-                    Video 5
+                    Video 5 • ZIZZVERSE
                 </p>
 
             </div>
 
+            <div class="reel-controls">
+
+                <button class="control-btn play-control" type="button">
+                    ▶
+                </button>
+
+                <button class="control-btn mute-control" type="button">
+                    🔊
+                </button>
+
+                <input
+                    class="reel-progress"
+                    type="range"
+                    min="0"
+                    max="100"
+                    value="0"
+                    step="0.1"
+                >
+
+                <button class="control-btn fullscreen-control" type="button">
+                    ⛶
+                </button>
+
+            </div>
+
+        </article>
+
+
+        <div
+            class="no-results"
+            id="noResults"
+        >
+            No shorts found.
         </div>
 
-
     </main>
-
-
-
-    <!-- =================================================
-         NO SEARCH RESULTS
-    ================================================= -->
-
-    <div
-        class="no-results"
-        id="noResults"
-    >
-        No shorts found.
-    </div>
-
-
-
-    <!-- =================================================
-         FOOTER
-    ================================================= -->
-
-    <footer>
-
-        © 2026
-
-        <strong>
-            ZIZZVERSE
-        </strong>
-
-        — Anime Universe
-
-    </footer>
 
 
 
@@ -354,7 +582,6 @@
     ================================================= -->
 
     <script src="shorts.js"></script>
-
 
 </body>
 
