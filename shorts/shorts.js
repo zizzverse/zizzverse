@@ -678,56 +678,65 @@ document.addEventListener("keydown", event => {
 
 });
 
-
 /* =================================================
-   MOBILE MENU
+   MENU BUTTON
 ================================================= */
 
-.mobile-menu {
-    position: fixed;
+const menuBtn =
+    document.getElementById("menuBtn");
 
-    top: 58px;
-    right: 12px;
 
-    width: 190px;
+if (menuBtn) {
 
-    z-index: 2000;
+    menuBtn.addEventListener("click", () => {
 
-    display: none;
+        /*
+           Create menu if it does not already exist
+        */
 
-    flex-direction: column;
+        let menu =
+            document.getElementById("mobileMenu");
 
-    padding: 8px;
 
-    background: rgba(15, 15, 20, 0.97);
+        if (!menu) {
 
-    border: 1px solid #292938;
+            menu =
+                document.createElement("div");
 
-    border-radius: 14px;
+            menu.id = "mobileMenu";
 
-    box-shadow: 0 10px 35px rgba(0,0,0,.5);
+            menu.className = "mobile-menu";
 
-    backdrop-filter: blur(12px);
-}
 
-.mobile-menu.active {
-    display: flex;
-}
+            menu.innerHTML = `
+                <a href="../">Home</a>
+                <a href="../#trending">Trending</a>
+                <a href="../#popular">Popular</a>
+                <a href="../#genres">Genres</a>
+                <a href="index.html">Shorts</a>
+            `;
 
-.mobile-menu a {
-    padding: 13px 14px;
 
-    color: #fff;
+            document.body.appendChild(menu);
 
-    text-decoration: none;
+        }
 
-    border-radius: 9px;
 
-    font-size: 14px;
-}
+        menu.classList.toggle("active");
 
-.mobile-menu a:hover {
-    background: rgba(139, 92, 246, .15);
 
-    color: #a66cff;
+        if (
+            menu.classList.contains("active")
+        ) {
+
+            menuBtn.textContent = "✕";
+
+        } else {
+
+            menuBtn.textContent = "☰";
+
+        }
+
+    });
+
 }
