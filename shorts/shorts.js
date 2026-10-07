@@ -1,89 +1,21 @@
 /* =================================================
-   ZIZZVERSE SHORTS JAVASCRIPT
+   ZIZZVERSE REELS JAVASCRIPT
 ================================================= */
 
+const reels = document.querySelectorAll(".reel");
+const videos = document.querySelectorAll(".reel-video");
 
-/* =================================================
-   MOBILE MENU
-================================================= */
-
-const menuButton = document.getElementById("menuBtn");
-const navigationMenu = document.getElementById("navLinks");
-
-if (menuButton && navigationMenu) {
-
-    menuButton.addEventListener("click", () => {
-
-        navigationMenu.classList.toggle("active");
-
-        const isOpen =
-            navigationMenu.classList.contains("active");
-
-        if (isOpen) {
-
-            menuButton.textContent = "✕";
-
-            menuButton.setAttribute(
-                "aria-label",
-                "Close menu"
-            );
-
-        } else {
-
-            menuButton.textContent = "☰";
-
-            menuButton.setAttribute(
-                "aria-label",
-                "Open menu"
-            );
-
-        }
-
-    });
-
-
-    /* Close menu after clicking a link */
-
-    navigationMenu
-        .querySelectorAll("a")
-        .forEach(link => {
-
-            link.addEventListener("click", () => {
-
-                navigationMenu.classList.remove("active");
-
-                menuButton.textContent = "☰";
-
-                menuButton.setAttribute(
-                    "aria-label",
-                    "Open menu"
-                );
-
-            });
-
-        });
-
-}
-
-
-/* =================================================
-   ALL VIDEOS
-================================================= */
-
-const videos = document.querySelectorAll(
-    ".short-card video"
-);
 
 
 /* =================================================
    PAUSE ALL OTHER VIDEOS
 ================================================= */
 
-function pauseOtherVideos(currentVideo) {
+function pauseOthers(current) {
 
     videos.forEach(video => {
 
-        if (video !== currentVideo) {
+        if (video !== current) {
             video.pause();
         }
 
@@ -92,854 +24,656 @@ function pauseOtherVideos(currentVideo) {
 }
 
 
+
 /* =================================================
-   PLAY VIDEO SAFELY
+   SET REEL STATE
 ================================================= */
 
-function playVideo(video) {
+function updateReelState(reel, video) {
 
-    pauseOtherVideos(video);
+    if (video.paused) {
 
-    const playPromise = video.play();
+        reel.classList.add("paused");
 
-    if (playPromise !== undefined) {
+    } else {
 
-        playPromise.catch(() => {
-            /* Browser prevented playback */
-        });
+        reel.classList.remove("paused");
 
     }
 
 }
 
 
-/* =================================================
-   AUTO PLAY / PAUSE
-================================================= */
-
-if ("IntersectionObserver" in window) {
-
-    const videoObserver =
-        new IntersectionObserver(
-            (entries) => {
-
-                entries.forEach(entry => {
-
-                    const video = entry.target;
-
-                    if (
-                        entry.isIntersecting &&
-                        entry.intersectionRatio >= 0.7
-                    ) {
-
-                        playVideo(video);
-
-                    } else {
-
-                        video.pause();
-
-                    }
-
-                });
-
-            },
-            {
-                threshold: [0.7]
-            }
-        );
-
-
-    videos.forEach(video => {
-
-        videoObserver.observe(video);
-
-    });
-
-}
-
 
 /* =================================================
-   CREATE CUSTOM CONTROLS
+   CREATE CONTROLS
 ================================================= */
 
-document
-    .querySelectorAll(".video-box")
-    .forEach(box => {
+reels.forEach(reel => {
 
-        const video = box.querySelector("video");
+    const video =
+        reel.querySelector(".reel-video");
 
-        if (!video) return;
+    const centerPlay =
+        reel.querySelector(".center-play");
 
+    const playControl =
+        reel.querySelector(".play-control");
 
-        /* Make sure autoplay can work */
+    const muteControl =
+        reel.querySelector(".mute-control");
 
-        video.muted = true;
+    const fullscreenControl =
+        reel.querySelector(".fullscreen-control");
 
+    const progress =
+        reel.querySelector(".reel-progress");
 
-        /* =================================================
-           CONTROLS CONTAINER
-        ================================================= */
+    const likeButton =
+        reel.querySelector(".like-btn");
 
-        const controls =
-            document.createElement("div");
+    const shareButton =
+        reel.querySelector(".share-btn");
 
-        controls.className =
-            "custom-controls";
 
 
-        /* =================================================
-           PLAY BUTTON
-        ================================================= */
+    /* =================================================
+       INITIAL STATE
+    ================================================= */
 
-        const playBtn =
-            document.createElement("button");
+    video.muted = false;
 
-        playBtn.className =
-            "custom-btn";
+    updateReelState(reel, video);
 
-        playBtn.type =
-            "button";
 
-        playBtn.textContent =
-            "▶";
 
-        playBtn.setAttribute(
-            "aria-label",
-            "Play or pause"
-        );
+    /* =================================================
+       PLAY
+    ================================================= */
 
+    function play() {
 
-        /* =================================================
-           BACK 10
-        ================================================= */
+        pauseOthers(video);
 
-        const backBtn =
-            document.createElement("button");
+        video.play().catch(() => {});
 
-        backBtn.className =
-            "custom-btn";
+    }
 
-        backBtn.type =
-            "button";
 
-        backBtn.textContent =
-            "↶10";
 
-        backBtn.setAttribute(
-            "aria-label",
-            "Back 10 seconds"
-        );
+    /* =================================================
+       VIDEO CLICK
+    ================================================= */
 
+    video.addEventListener("click", () => {
 
-        /* =================================================
-           FORWARD 10
-        ================================================= */
+        if (video.paused) {
 
-        const forwardBtn =
-            document.createElement("button");
+            video.muted = false;
 
-        forwardBtn.className =
-            "custom-btn";
+            muteControl.textContent = "🔊";
 
-        forwardBtn.type =
-            "button";
+            play();
 
-        forwardBtn.textContent =
-            "10↷";
+        } else {
 
-        forwardBtn.setAttribute(
-            "aria-label",
-            "Forward 10 seconds"
-        );
-
-
-        /* =================================================
-           MUTE
-        ================================================= */
-
-        const muteBtn =
-            document.createElement("button");
-
-        muteBtn.className =
-            "custom-btn";
-
-        muteBtn.type =
-            "button";
-
-        muteBtn.textContent =
-            "🔇";
-
-        muteBtn.setAttribute(
-            "aria-label",
-            "Mute or unmute"
-        );
-
-
-        /* =================================================
-           PROGRESS BAR
-        ================================================= */
-
-        const progress =
-            document.createElement("input");
-
-        progress.className =
-            "custom-progress";
-
-        progress.type =
-            "range";
-
-        progress.min =
-            "0";
-
-        progress.max =
-            "100";
-
-        progress.value =
-            "0";
-
-        progress.step =
-            "0.1";
-
-        progress.setAttribute(
-            "aria-label",
-            "Video progress"
-        );
-
-
-        /* =================================================
-           FULLSCREEN
-        ================================================= */
-
-        const fullscreenBtn =
-            document.createElement("button");
-
-        fullscreenBtn.className =
-            "custom-btn";
-
-        fullscreenBtn.type =
-            "button";
-
-        fullscreenBtn.textContent =
-            "⛶";
-
-        fullscreenBtn.setAttribute(
-            "aria-label",
-            "Fullscreen"
-        );
-
-
-        /* =================================================
-           ADD CONTROLS
-        ================================================= */
-
-        controls.appendChild(playBtn);
-
-        controls.appendChild(backBtn);
-
-        controls.appendChild(forwardBtn);
-
-        controls.appendChild(muteBtn);
-
-        controls.appendChild(progress);
-
-        controls.appendChild(fullscreenBtn);
-
-        box.appendChild(controls);
-
-
-        /* =================================================
-           VIDEO CLICK = PLAY / PAUSE
-        ================================================= */
-
-        video.addEventListener(
-            "click",
-            event => {
-
-                event.stopPropagation();
-
-                if (video.paused) {
-
-                    playVideo(video);
-
-                } else {
-
-                    video.pause();
-
-                }
-
-                showControls();
-
-            }
-        );
-
-
-        /* =================================================
-           PLAY BUTTON
-        ================================================= */
-
-        playBtn.addEventListener(
-            "click",
-            event => {
-
-                event.stopPropagation();
-
-                if (video.paused) {
-
-                    playVideo(video);
-
-                } else {
-
-                    video.pause();
-
-                }
-
-                showControls();
-
-            }
-        );
-
-
-        /* =================================================
-           PLAY ICON UPDATE
-        ================================================= */
-
-        video.addEventListener(
-            "play",
-            () => {
-
-                playBtn.textContent =
-                    "⏸";
-
-            }
-        );
-
-
-        video.addEventListener(
-            "pause",
-            () => {
-
-                playBtn.textContent =
-                    "▶";
-
-            }
-        );
-
-
-        /* =================================================
-           BACK 10 SECONDS
-        ================================================= */
-
-        backBtn.addEventListener(
-            "click",
-            event => {
-
-                event.stopPropagation();
-
-                video.currentTime =
-                    Math.max(
-                        0,
-                        video.currentTime - 10
-                    );
-
-                showControls();
-
-            }
-        );
-
-
-        /* =================================================
-           FORWARD 10 SECONDS
-        ================================================= */
-
-        forwardBtn.addEventListener(
-            "click",
-            event => {
-
-                event.stopPropagation();
-
-                if (
-                    Number.isFinite(video.duration)
-                ) {
-
-                    video.currentTime =
-                        Math.min(
-                            video.duration,
-                            video.currentTime + 10
-                        );
-
-                }
-
-                showControls();
-
-            }
-        );
-
-
-        /* =================================================
-           MUTE / UNMUTE
-        ================================================= */
-
-        muteBtn.addEventListener(
-            "click",
-            event => {
-
-                event.stopPropagation();
-
-                video.muted =
-                    !video.muted;
-
-
-                if (video.muted) {
-
-                    muteBtn.textContent =
-                        "🔇";
-
-                } else {
-
-                    muteBtn.textContent =
-                        "🔊";
-
-                }
-
-                showControls();
-
-            }
-        );
-
-
-        /* =================================================
-           UPDATE PROGRESS
-        ================================================= */
-
-        video.addEventListener(
-            "timeupdate",
-            () => {
-
-                if (
-                    Number.isFinite(video.duration) &&
-                    video.duration > 0
-                ) {
-
-                    progress.value =
-                        (
-                            video.currentTime /
-                            video.duration
-                        ) * 100;
-
-                }
-
-            }
-        );
-
-
-        /* =================================================
-           VIDEO LOADED
-        ================================================= */
-
-        video.addEventListener(
-            "loadedmetadata",
-            () => {
-
-                progress.value = "0";
-
-            }
-        );
-
-
-        /* =================================================
-           SEEK
-        ================================================= */
-
-        progress.addEventListener(
-            "input",
-            event => {
-
-                event.stopPropagation();
-
-                if (
-                    Number.isFinite(video.duration) &&
-                    video.duration > 0
-                ) {
-
-                    video.currentTime =
-                        (
-                            Number(progress.value) /
-                            100
-                        ) * video.duration;
-
-                }
-
-                showControls();
-
-            }
-        );
-
-
-        /* =================================================
-           FULLSCREEN
-        ================================================= */
-
-        fullscreenBtn.addEventListener(
-            "click",
-            async event => {
-
-                event.stopPropagation();
-
-                try {
-
-                    if (
-                        document.fullscreenElement
-                    ) {
-
-                        await document.exitFullscreen();
-
-                    } else if (
-                        box.requestFullscreen
-                    ) {
-
-                        await box.requestFullscreen();
-
-                    }
-
-                } catch (error) {
-
-                    /* Fullscreen not available */
-
-                }
-
-                showControls();
-
-            }
-        );
-
-
-        /* =================================================
-           DOUBLE CLICK = FULLSCREEN
-        ================================================= */
-
-        video.addEventListener(
-            "dblclick",
-            async event => {
-
-                event.stopPropagation();
-
-                try {
-
-                    if (
-                        document.fullscreenElement
-                    ) {
-
-                        await document.exitFullscreen();
-
-                    } else if (
-                        box.requestFullscreen
-                    ) {
-
-                        await box.requestFullscreen();
-
-                    }
-
-                } catch (error) {
-
-                    /* Fullscreen not available */
-
-                }
-
-            }
-        );
-
-
-        /* =================================================
-           SHOW / HIDE CONTROLS
-        ================================================= */
-
-        let hideTimer;
-
-
-        function showControls() {
-
-            box.classList.add(
-                "controls-visible"
-            );
-
-            clearTimeout(hideTimer);
-
-
-            hideTimer =
-                setTimeout(
-                    () => {
-
-                        if (!video.paused) {
-
-                            box.classList.remove(
-                                "controls-visible"
-                            );
-
-                        }
-
-                    },
-                    2500
-                );
+            video.pause();
 
         }
 
-
-        /* Desktop */
-
-        box.addEventListener(
-            "mouseenter",
-            showControls
-        );
+    });
 
 
-        box.addEventListener(
-            "mousemove",
-            showControls
-        );
+
+    /* =================================================
+       CENTER PLAY
+    ================================================= */
+
+    centerPlay.addEventListener("click", event => {
+
+        event.stopPropagation();
+
+        if (video.paused) {
+
+            video.muted = false;
+
+            muteControl.textContent = "🔊";
+
+            play();
+
+        } else {
+
+            video.pause();
+
+        }
+
+    });
 
 
-        /* Mobile */
 
-        box.addEventListener(
-            "touchstart",
-            showControls,
-            {
-                passive: true
-            }
-        );
+    /* =================================================
+       PLAY CONTROL
+    ================================================= */
+
+    playControl.addEventListener("click", event => {
+
+        event.stopPropagation();
+
+        if (video.paused) {
+
+            video.muted = false;
+
+            muteControl.textContent = "🔊";
+
+            play();
+
+        } else {
+
+            video.pause();
+
+        }
+
+    });
 
 
-        /* Keep controls visible when paused */
 
-        video.addEventListener(
-            "pause",
-            () => {
+    /* =================================================
+       PLAY EVENT
+    ================================================= */
 
-                box.classList.add(
-                    "controls-visible"
+    video.addEventListener("play", () => {
+
+        playControl.textContent = "⏸";
+
+        updateReelState(reel, video);
+
+    });
+
+
+
+    /* =================================================
+       PAUSE EVENT
+    ================================================= */
+
+    video.addEventListener("pause", () => {
+
+        playControl.textContent = "▶";
+
+        updateReelState(reel, video);
+
+    });
+
+
+
+    /* =================================================
+       MUTE
+    ================================================= */
+
+    muteControl.addEventListener("click", event => {
+
+        event.stopPropagation();
+
+        video.muted = !video.muted;
+
+        muteControl.textContent =
+            video.muted ? "🔇" : "🔊";
+
+    });
+
+
+
+    /* =================================================
+       PROGRESS
+    ================================================= */
+
+    video.addEventListener("timeupdate", () => {
+
+        if (
+            Number.isFinite(video.duration) &&
+            video.duration > 0
+        ) {
+
+            progress.value =
+                (
+                    video.currentTime /
+                    video.duration
+                ) * 100;
+
+        }
+
+    });
+
+
+
+    progress.addEventListener("input", event => {
+
+        event.stopPropagation();
+
+        if (
+            Number.isFinite(video.duration) &&
+            video.duration > 0
+        ) {
+
+            video.currentTime =
+                (
+                    progress.value / 100
+                ) * video.duration;
+
+        }
+
+    });
+
+
+
+    /* =================================================
+       FULLSCREEN
+    ================================================= */
+
+    fullscreenControl.addEventListener(
+        "click",
+        async event => {
+
+            event.stopPropagation();
+
+            try {
+
+                if (document.fullscreenElement) {
+
+                    await document.exitFullscreen();
+
+                } else if (video.requestFullscreen) {
+
+                    await video.requestFullscreen();
+
+                } else if (
+                    video.webkitEnterFullscreen
+                ) {
+
+                    video.webkitEnterFullscreen();
+
+                }
+
+            } catch (error) {
+
+                console.log(
+                    "Fullscreen error:",
+                    error
                 );
 
             }
-        );
+
+        }
+    );
+
+
+
+    /* =================================================
+       DOUBLE CLICK FULLSCREEN
+    ================================================= */
+
+    video.addEventListener(
+        "dblclick",
+        async event => {
+
+            event.stopPropagation();
+
+            try {
+
+                if (document.fullscreenElement) {
+
+                    await document.exitFullscreen();
+
+                } else if (video.requestFullscreen) {
+
+                    await video.requestFullscreen();
+
+                }
+
+            } catch (error) {
+
+                console.log(
+                    "Fullscreen error:",
+                    error
+                );
+
+            }
+
+        }
+    );
+
+
+
+    /* =================================================
+       LIKE
+    ================================================= */
+
+    likeButton.addEventListener("click", event => {
+
+        event.stopPropagation();
+
+        likeButton.classList.toggle("liked");
+
+        if (
+            likeButton.classList.contains("liked")
+        ) {
+
+            likeButton.firstChild.textContent = "♥";
+
+        } else {
+
+            likeButton.firstChild.textContent = "♡";
+
+        }
 
     });
+
+
+
+    /* =================================================
+       SHARE
+    ================================================= */
+
+    shareButton.addEventListener("click", async event => {
+
+        event.stopPropagation();
+
+        const url =
+            window.location.href;
+
+        if (navigator.share) {
+
+            try {
+
+                await navigator.share({
+                    title: "ZIZZVERSE Shorts",
+                    text: "Watch this anime short on ZIZZVERSE!",
+                    url: url
+                });
+
+            } catch (error) {
+
+                /* User cancelled share */
+
+            }
+
+        } else {
+
+            try {
+
+                await navigator.clipboard.writeText(url);
+
+                alert("Link copied!");
+
+            } catch (error) {
+
+                alert("Copy the page link to share.");
+
+            }
+
+        }
+
+    });
+
+});
+
+
+
+/* =================================================
+   AUTO PLAY WHEN REEL IS VISIBLE
+================================================= */
+
+const observer =
+    new IntersectionObserver(
+        entries => {
+
+            entries.forEach(entry => {
+
+                const reel =
+                    entry.target;
+
+                const video =
+                    reel.querySelector(".reel-video");
+
+
+                if (
+                    entry.isIntersecting &&
+                    entry.intersectionRatio >= 0.75
+                ) {
+
+                    /*
+                       Browser may block autoplay with sound.
+                       If it does, user can tap the video.
+                    */
+
+                    video.play().catch(() => {});
+
+                } else {
+
+                    video.pause();
+
+                }
+
+            });
+
+        },
+        {
+            threshold: [0.75]
+        }
+    );
+
+
+reels.forEach(reel => {
+
+    observer.observe(reel);
+
+});
+
 
 
 /* =================================================
    SEARCH
 ================================================= */
 
-const searchInput =
-    document.getElementById(
-        "shortSearch"
-    );
+const searchBtn =
+    document.getElementById("searchBtn");
 
-const shortCards =
-    document.querySelectorAll(
-        ".short-card"
-    );
+const searchPanel =
+    document.getElementById("searchPanel");
+
+const closeSearch =
+    document.getElementById("closeSearch");
+
+const searchInput =
+    document.getElementById("shortSearch");
 
 const noResults =
-    document.getElementById(
-        "noResults"
-    );
+    document.getElementById("noResults");
 
 
-if (searchInput) {
+searchBtn.addEventListener("click", () => {
 
-    searchInput.addEventListener(
-        "input",
-        () => {
+    searchPanel.classList.toggle("active");
 
-            const searchText =
-                searchInput.value
-                    .toLowerCase()
-                    .trim();
+    if (
+        searchPanel.classList.contains("active")
+    ) {
 
+        searchInput.focus();
 
-            let found = false;
+    }
 
-
-            shortCards.forEach(card => {
-
-                const title =
-                    card
-                        .querySelector("h3")
-                        ?.textContent
-                        .toLowerCase() || "";
+});
 
 
-                const description =
-                    card
-                        .querySelector("p")
-                        ?.textContent
-                        .toLowerCase() || "";
+closeSearch.addEventListener("click", () => {
+
+    searchPanel.classList.remove("active");
+
+    searchInput.value = "";
+
+    reels.forEach(reel => {
+
+        reel.style.display = "";
+
+    });
+
+});
 
 
-                const dataTitle =
-                    (
-                        card.getAttribute(
-                            "data-title"
-                        ) || ""
-                    ).toLowerCase();
+
+searchInput.addEventListener("input", () => {
+
+    const text =
+        searchInput.value
+            .toLowerCase()
+            .trim();
+
+    let found = false;
 
 
-                const matches =
-                    title.includes(searchText) ||
-                    description.includes(searchText) ||
-                    dataTitle.includes(searchText);
+    reels.forEach(reel => {
+
+        const title =
+            (
+                reel.dataset.title || ""
+            ).toLowerCase();
+
+        const info =
+            reel.textContent.toLowerCase();
 
 
-                if (matches) {
-
-                    card.style.display = "";
-
-                    found = true;
-
-                } else {
-
-                    card.style.display = "none";
-
-                    const video =
-                        card.querySelector("video");
-
-                    if (video) {
-                        video.pause();
-                    }
-
-                }
-
-            });
+        const match =
+            title.includes(text) ||
+            info.includes(text);
 
 
-            if (noResults) {
+        if (match) {
 
-                if (
-                    found ||
-                    searchText === ""
-                ) {
+            reel.style.display = "";
 
-                    noResults.style.display =
-                        "none";
+            found = true;
 
-                } else {
+        } else {
 
-                    noResults.style.display =
-                        "block";
+            reel.style.display = "none";
 
-                }
+            const video =
+                reel.querySelector(".reel-video");
 
+            if (video) {
+                video.pause();
             }
 
         }
-    );
 
-}
+    });
+
+
+    if (text && !found) {
+
+        noResults.style.display = "flex";
+
+    } else {
+
+        noResults.style.display = "none";
+
+    }
+
+});
+
 
 
 /* =================================================
-   KEYBOARD SHORTCUTS
+   KEYBOARD
 ================================================= */
 
-document.addEventListener(
-    "keydown",
-    event => {
+document.addEventListener("keydown", event => {
 
-        const activeElement =
-            document.activeElement;
+    if (
+        document.activeElement &&
+        document.activeElement.tagName === "INPUT"
+    ) {
+        return;
+    }
 
 
-        /* Don't control video while typing */
+    let activeVideo = null;
+
+
+    videos.forEach(video => {
+
+        const rect =
+            video.getBoundingClientRect();
+
+        const visible =
+            rect.top < window.innerHeight &&
+            rect.bottom > 0;
 
         if (
-            activeElement &&
-            (
-                activeElement.tagName === "INPUT" ||
-                activeElement.tagName === "TEXTAREA"
-            )
+            visible &&
+            !video.paused
         ) {
-            return;
-        }
 
-
-        /* Find visible/active video */
-
-        let activeVideo = null;
-
-
-        videos.forEach(video => {
-
-            if (
-                !video.paused &&
-                !video.ended
-            ) {
-
-                activeVideo = video;
-
-            }
-
-        });
-
-
-        if (!activeVideo) return;
-
-
-        /* Space = Play / Pause */
-
-        if (event.code === "Space") {
-
-            event.preventDefault();
-
-            if (activeVideo.paused) {
-
-                playVideo(activeVideo);
-
-            } else {
-
-                activeVideo.pause();
-
-            }
+            activeVideo = video;
 
         }
 
-
-        /* Arrow Left = Back */
-
-        if (event.code === "ArrowLeft") {
-
-            activeVideo.currentTime =
-                Math.max(
-                    0,
-                    activeVideo.currentTime - 5
-                );
-
-        }
+    });
 
 
-        /* Arrow Right = Forward */
+    if (!activeVideo) return;
 
-        if (event.code === "ArrowRight") {
 
-            if (
-                Number.isFinite(
-                    activeVideo.duration
-                )
-            ) {
+    /* SPACE */
 
-                activeVideo.currentTime =
-                    Math.min(
-                        activeVideo.duration,
-                        activeVideo.currentTime + 5
-                    );
+    if (event.code === "Space") {
 
-            }
+        event.preventDefault();
+
+        if (activeVideo.paused) {
+
+            activeVideo.play().catch(() => {});
+
+        } else {
+
+            activeVideo.pause();
 
         }
 
     }
-);
 
 
-/* =================================================
-   END
-================================================= */
+    /* LEFT */
+
+    if (event.code === "ArrowLeft") {
+
+        activeVideo.currentTime =
+            Math.max(
+                0,
+                activeVideo.currentTime - 5
+            );
+
+    }
+
+
+    /* RIGHT */
+
+    if (event.code === "ArrowRight") {
+
+        if (
+            Number.isFinite(
+                activeVideo.duration
+            )
+        ) {
+
+            activeVideo.currentTime =
+                Math.min(
+                    activeVideo.duration,
+                    activeVideo.currentTime + 5
+                );
+
+        }
+
+    }
+
+});
