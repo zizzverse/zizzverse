@@ -1,5 +1,5 @@
 /* =================================================
-   ZIZZVERSE SHORTS CSS
+   ZIZZVERSE REELS STYLE
 ================================================= */
 
 * {
@@ -8,20 +8,21 @@
     box-sizing: border-box;
 }
 
+html,
+body {
+    width: 100%;
+    height: 100%;
+}
+
 html {
     scroll-behavior: smooth;
 }
 
 body {
-    font-family: Arial, Helvetica, sans-serif;
-    background: #07070b;
+    background: #050505;
     color: #fff;
-    line-height: 1.5;
-}
-
-a {
-    text-decoration: none;
-    color: inherit;
+    font-family: Arial, Helvetica, sans-serif;
+    overflow: hidden;
 }
 
 button,
@@ -31,249 +32,318 @@ input {
 
 
 /* =================================================
-   NAVIGATION
+   TOP NAV
 ================================================= */
 
-.nav {
-    position: sticky;
-    top: 0;
-    z-index: 1000;
+.top-nav {
+    position: fixed;
 
-    height: 70px;
+    top: 0;
+    left: 0;
+    right: 0;
+
+    height: 64px;
+
+    z-index: 1000;
 
     display: flex;
     align-items: center;
 
-    padding: 0 5%;
+    padding: 0 22px;
 
-    background: rgba(7, 7, 11, 0.95);
-    backdrop-filter: blur(12px);
+    background: linear-gradient(
+        rgba(0,0,0,.75),
+        transparent
+    );
 
-    border-bottom: 1px solid #222230;
+    pointer-events: none;
 }
 
 .logo {
-    font-size: 25px;
+    font-size: 23px;
     font-weight: 900;
     letter-spacing: 1px;
 
     color: #a66cff;
 
-    flex: 1;
+    pointer-events: auto;
 }
 
 .logo span {
     color: #a66cff;
 }
 
-.nav-links {
+.nav-actions {
+    margin-left: auto;
+
     display: flex;
-    align-items: center;
-    gap: 25px;
+    gap: 10px;
 
-    color: #c9c9d3;
-    font-size: 14px;
+    pointer-events: auto;
 }
 
-.nav-links a {
-    transition: 0.25s;
-}
+.nav-btn {
+    width: 40px;
+    height: 40px;
 
-.nav-links a:hover {
-    color: #b477ff;
-}
+    border: none;
+    border-radius: 50%;
 
-.nav-links .active {
-    color: #a66cff;
-}
-
-
-/* =================================================
-   MOBILE MENU BUTTON
-================================================= */
-
-.menu-btn {
-    display: none;
-
-    width: 42px;
-    height: 42px;
-
-    padding: 0;
-
-    align-items: center;
-    justify-content: center;
-
-    background: #14141d;
-
-    border: 1px solid #292938;
-    border-radius: 12px;
+    background: rgba(0,0,0,.55);
 
     color: #fff;
-
-    font-size: 25px;
-    line-height: 1;
 
     cursor: pointer;
 
-    appearance: none;
-    -webkit-appearance: none;
-}
-
-.menu-btn:hover {
-    background: #1b1b26;
+    font-size: 18px;
 }
 
 
 /* =================================================
-   SHORTS HERO
+   SEARCH PANEL
 ================================================= */
 
-.shorts-hero {
-    text-align: center;
-    padding: 45px 20px 25px;
-}
+.search-panel {
+    position: fixed;
 
-.shorts-hero h1 {
-    font-size: 42px;
-    margin-bottom: 10px;
-}
+    top: 64px;
+    left: 50%;
 
-.shorts-hero h1 span {
-    color: #8b5cf6;
-}
+    transform: translateX(-50%);
 
-.shorts-hero p {
-    color: #999;
-    font-size: 15px;
-}
+    z-index: 1100;
 
+    width: min(500px, 90%);
 
-/* =================================================
-   SEARCH
-================================================= */
+    display: none;
 
-.shorts-search {
-    width: 92%;
-    max-width: 600px;
+    gap: 8px;
 
-    margin: 0 auto 25px;
+    padding: 8px;
 
-    position: relative;
-}
-
-.shorts-search input {
-    width: 100%;
-
-    padding: 14px 48px 14px 18px;
-
-    border-radius: 14px;
+    background: rgba(15,15,20,.95);
 
     border: 1px solid #292938;
 
+    border-radius: 14px;
+}
+
+.search-panel.active {
+    display: flex;
+}
+
+.search-panel input {
+    flex: 1;
+
+    min-width: 0;
+
+    padding: 11px 14px;
+
+    border: 1px solid #292938;
+    border-radius: 10px;
+
     outline: none;
 
-    background: #111118;
+    background: #09090d;
+
+    color: #fff;
+}
+
+.search-panel button {
+    width: 42px;
+
+    border: none;
+    border-radius: 10px;
+
+    background: #22222d;
 
     color: #fff;
 
-    font-size: 15px;
-}
-
-.shorts-search input::placeholder {
-    color: #777;
-}
-
-.shorts-search input:focus {
-    border-color: #8b5cf6;
-    box-shadow: 0 0 15px rgba(139, 92, 246, 0.15);
-}
-
-.search-icon {
-    position: absolute;
-
-    right: 17px;
-    top: 50%;
-
-    transform: translateY(-50%);
-
-    color: #a66cff;
-
-    font-size: 20px;
+    cursor: pointer;
 }
 
 
 /* =================================================
-   SHORTS FEED
+   REELS FEED
 ================================================= */
 
-.shorts-container {
+.reels-feed {
+    width: 100vw;
+    height: 100vh;
+
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    scroll-snap-type: y mandatory;
+
+    scrollbar-width: none;
+
+    background: #050505;
+}
+
+.reels-feed::-webkit-scrollbar {
+    display: none;
+}
+
+
+/* =================================================
+   REEL
+================================================= */
+
+.reel {
+    position: relative;
+
+    width: 100vw;
+    height: 100vh;
+
+    min-height: 100vh;
+
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+
+    background: #000;
+
+    overflow: hidden;
+}
+
+
+/* =================================================
+   VIDEO
+================================================= */
+
+.reel-video {
+    position: absolute;
+
+    inset: 0;
+
     width: 100%;
-    max-width: 900px;
+    height: 100%;
 
-    margin: 0 auto;
+    object-fit: contain;
 
-    padding: 0 15px 50px;
+    background: #000;
+
+    cursor: pointer;
+}
+
+
+/* =================================================
+   GRADIENT
+================================================= */
+
+.video-gradient {
+    position: absolute;
+
+    inset: 0;
+
+    pointer-events: none;
+
+    background:
+        linear-gradient(
+            to bottom,
+            rgba(0,0,0,.35),
+            transparent 25%,
+            transparent 60%,
+            rgba(0,0,0,.8)
+        );
+}
+
+
+/* =================================================
+   CENTER PLAY
+================================================= */
+
+.center-play {
+    position: absolute;
+
+    top: 50%;
+    left: 50%;
+
+    transform: translate(-50%, -50%);
+
+    width: 68px;
+    height: 68px;
+
+    border: none;
+    border-radius: 50%;
+
+    background: rgba(0,0,0,.55);
+
+    color: #fff;
+
+    font-size: 28px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+
+    opacity: 0;
+
+    transition:
+        opacity .2s,
+        transform .2s;
+}
+
+.reel.paused .center-play {
+    opacity: 1;
+}
+
+.center-play:hover {
+    transform: translate(-50%, -50%) scale(1.08);
+}
+
+
+/* =================================================
+   RIGHT ACTIONS
+================================================= */
+
+.reel-actions {
+    position: absolute;
+
+    right: 18px;
+    bottom: 120px;
+
+    z-index: 10;
 
     display: flex;
     flex-direction: column;
 
+    align-items: center;
+
     gap: 20px;
 }
 
+.action-btn {
+    width: 52px;
 
-/* =================================================
-   SHORT CARD
-================================================= */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
-.short-card {
-    width: 100%;
+    gap: 4px;
 
-    position: relative;
+    border: none;
 
-    overflow: hidden;
+    background: transparent;
 
-    border-radius: 20px;
-
-    background: #111118;
-
-    border: 1px solid #22222d;
-
-    scroll-snap-align: start;
-    scroll-snap-stop: always;
-}
-
-
-/* =================================================
-   VIDEO BOX
-================================================= */
-
-.video-box {
-    width: 100%;
-
-    height: calc(100vh - 160px);
-
-    min-height: 550px;
-
-    max-height: 800px;
-
-    position: relative;
-
-    background: #000;
-
-    overflow: hidden;
-}
-
-.video-box video {
-    width: 100%;
-    height: 100%;
-
-    object-fit: cover;
-
-    display: block;
+    color: #fff;
 
     cursor: pointer;
 
-    background: #000;
+    font-size: 28px;
+
+    text-shadow: 0 2px 5px #000;
+}
+
+.action-btn span {
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.like-btn.liked {
+    color: #ff3b6b;
 }
 
 
@@ -281,79 +351,68 @@ input {
    VIDEO INFO
 ================================================= */
 
-.video-info {
+.reel-info {
     position: absolute;
 
-    left: 0;
-    right: 0;
-    bottom: 0;
+    left: 20px;
+    right: 90px;
+    bottom: 74px;
 
-    padding: 45px 20px 18px;
+    z-index: 10;
 
-    background:
-        linear-gradient(
-            transparent,
-            rgba(0, 0, 0, 0.9)
-        );
-
-    pointer-events: none;
+    text-shadow: 0 2px 6px #000;
 }
 
-.video-info h3 {
-    font-size: 18px;
+.reel-info h2 {
+    font-size: 19px;
+
     margin-bottom: 5px;
 }
 
-.video-info p {
-    color: #ccc;
+.reel-info p {
+    color: #ddd;
+
     font-size: 14px;
 }
 
 
 /* =================================================
-   CUSTOM VIDEO CONTROLS
+   BOTTOM CONTROLS
 ================================================= */
 
-.custom-controls {
+.reel-controls {
     position: absolute;
 
-    left: 10px;
-    right: 10px;
-    bottom: 10px;
+    left: 15px;
+    right: 15px;
+    bottom: 18px;
 
     z-index: 20;
 
     display: flex;
     align-items: center;
 
-    gap: 5px;
+    gap: 8px;
 
-    padding: 7px 8px;
+    padding: 7px 9px;
 
-    background: rgba(0, 0, 0, 0.68);
+    background: rgba(0,0,0,.58);
 
-    backdrop-filter: blur(10px);
-
-    -webkit-backdrop-filter: blur(10px);
-
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(8px);
 
     border-radius: 12px;
 
     opacity: 0;
 
-    transform: translateY(10px);
+    transform: translateY(8px);
 
     transition:
-        opacity 0.25s ease,
-        transform 0.25s ease;
+        opacity .2s,
+        transform .2s;
 }
 
-
-/* Show controls */
-
-.video-box:hover .custom-controls,
-.video-box.controls-visible .custom-controls {
+.reel:hover .reel-controls,
+.reel.controls-visible .reel-controls {
     opacity: 1;
 
     transform: translateY(0);
@@ -361,53 +420,40 @@ input {
 
 
 /* =================================================
-   CUSTOM BUTTON
+   CONTROL BUTTON
 ================================================= */
 
-.custom-btn {
+.control-btn {
+    width: 36px;
+    height: 36px;
+
+    flex-shrink: 0;
+
     border: none;
+    border-radius: 8px;
 
     background: transparent;
 
     color: #fff;
 
-    width: 38px;
-    height: 38px;
-
-    border-radius: 8px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    font-size: 16px;
-
     cursor: pointer;
 
-    flex-shrink: 0;
-
-    transition:
-        background 0.2s ease,
-        transform 0.15s ease;
+    font-size: 16px;
 }
 
-.custom-btn:hover {
-    background: rgba(255, 255, 255, 0.15);
-}
-
-.custom-btn:active {
-    transform: scale(0.92);
+.control-btn:hover {
+    background: rgba(255,255,255,.15);
 }
 
 
 /* =================================================
-   PROGRESS BAR
+   PROGRESS
 ================================================= */
 
-.custom-progress {
+.reel-progress {
     flex: 1;
 
-    min-width: 40px;
+    min-width: 30px;
 
     height: 4px;
 
@@ -424,49 +470,40 @@ input {
 .no-results {
     display: none;
 
-    text-align: center;
+    position: fixed;
 
-    padding: 30px 20px;
+    inset: 0;
+
+    align-items: center;
+    justify-content: center;
+
+    background: #050505;
 
     color: #888;
 
-    font-size: 15px;
+    z-index: 500;
 }
 
 
 /* =================================================
-   DESKTOP SCROLL SNAP
+   DESKTOP
 ================================================= */
 
-@media (min-width: 601px) {
+@media (min-width: 701px) {
 
-    .shorts-container {
-        scroll-snap-type: y mandatory;
-
-        max-height: calc(100vh - 70px);
-
-        overflow-y: auto;
-
-        scrollbar-width: thin;
+    .reels-feed {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
 
-}
+    .reel {
+        width: min(100vw, 520px);
 
+        border-left: 1px solid #222;
+        border-right: 1px solid #222;
+    }
 
-/* =================================================
-   FOOTER
-================================================= */
-
-footer {
-    text-align: center;
-
-    padding: 25px;
-
-    border-top: 1px solid #20202a;
-
-    color: #777;
-
-    font-size: 13px;
 }
 
 
@@ -474,173 +511,67 @@ footer {
    MOBILE
 ================================================= */
 
-@media (max-width: 600px) {
+@media (max-width: 700px) {
 
-    .nav {
-        height: 70px;
+    .top-nav {
+        height: 58px;
 
-        padding: 0 18px;
-
-        gap: 12px;
+        padding: 0 14px;
     }
 
     .logo {
-        font-size: 23px;
+        font-size: 21px;
     }
 
-
-    /* MOBILE MENU */
-
-    .nav-links {
-        display: none;
-
-        position: absolute;
-
-        top: 70px;
-        left: 0;
-
-        width: 100%;
-
-        padding: 10px 20px;
-
-        background: #0d0d14;
-
-        border-bottom: 1px solid #252532;
-
-        flex-direction: column;
-
-        gap: 0;
+    .nav-btn {
+        width: 38px;
+        height: 38px;
     }
 
-    .nav-links.active {
-        display: flex;
-    }
-
-    .nav-links a {
-        padding: 15px 5px;
-
-        font-size: 16px;
-
-        border-bottom: 1px solid #20202a;
-    }
-
-    .menu-btn {
-        display: flex;
-    }
-
-
-    /* HERO */
-
-    .shorts-hero {
-        padding: 35px 20px 20px;
-    }
-
-    .shorts-hero h1 {
-        font-size: 32px;
-    }
-
-    .shorts-hero p {
-        font-size: 14px;
-    }
-
-
-    /* SEARCH */
-
-    .shorts-search {
-        width: 92%;
-
-        margin-bottom: 15px;
-    }
-
-
-    /* MOBILE FEED */
-
-    .shorts-container {
-        width: 100%;
-
-        padding: 0 8px 30px;
-
-        gap: 12px;
-
-        max-height: none;
-
-        overflow-y: auto;
-
-        scroll-snap-type: y mandatory;
-
-        -webkit-overflow-scrolling: touch;
-    }
-
-
-    /* MOBILE CARD */
-
-    .short-card {
-        flex: 0 0 auto;
-
-        height: calc(100vh - 145px);
-
-        min-height: 500px;
-
-        border-radius: 18px;
-
-        scroll-snap-align: start;
-
-        scroll-snap-stop: always;
-    }
-
-
-    /* MOBILE VIDEO */
-
-    .video-box {
-        width: 100%;
-        height: 100%;
-
-        min-height: 0;
-        max-height: none;
-    }
-
-    .video-box video {
+    .reel-video {
         object-fit: cover;
     }
 
+    .reel-actions {
+        right: 10px;
+        bottom: 115px;
 
-    /* MOBILE INFO */
-
-    .video-info {
-        padding: 70px 16px 18px;
+        gap: 17px;
     }
 
-    .video-info h3 {
+    .action-btn {
+        width: 45px;
+
+        font-size: 25px;
+    }
+
+    .reel-info {
+        left: 14px;
+        right: 70px;
+        bottom: 67px;
+    }
+
+    .reel-info h2 {
         font-size: 17px;
     }
 
-    .video-info p {
+    .reel-info p {
         font-size: 13px;
     }
 
-
-    /* MOBILE CONTROLS */
-
-    .custom-controls {
-        left: 7px;
-        right: 7px;
-        bottom: 7px;
+    .reel-controls {
+        left: 8px;
+        right: 8px;
+        bottom: 8px;
 
         padding: 5px;
-
-        gap: 3px;
     }
 
-    .custom-btn {
+    .control-btn {
         width: 34px;
         height: 34px;
 
         font-size: 14px;
-    }
-
-
-    footer {
-        display: none;
     }
 
 }
